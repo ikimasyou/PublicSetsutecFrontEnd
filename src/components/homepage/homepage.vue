@@ -27,6 +27,8 @@ import WorkRecord from "../workRecord/workRecord.vue"
 import ChangePassword from "../changePassword/changePassword.vue"
 import EventBus from '../../eventBus.js';
 import SkillSubmit from "../skill/SkillSubmit.vue";
+import BPInfo from "../dbManager/BPInfo.vue";
+import BPResume from "../dbManager/BPResume.vue";
 
 export default {
   data(){
@@ -47,7 +49,9 @@ export default {
     TransportationFeeList,
     ChangePassword,
     MyTransportationFeeList,
-    SkillSubmit
+    SkillSubmit,
+    BPInfo,
+    BPResume
   },
   beforeMount(){
     this.mainContent = "Attendance",
