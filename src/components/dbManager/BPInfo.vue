@@ -9,12 +9,12 @@
                 <!-- 社員姓 / 社員名 -->
                 <el-row :gutter="20">
                     <el-col :span="12">
-                        <el-form-item label="社員姓">
+                        <el-form-item label="社員姓" required>
                             <el-input v-model="form.surname" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="社員名">
+                        <el-form-item label="社員名" required>
                             <el-input v-model="form.givenName" />
                         </el-form-item>
                     </el-col>
@@ -51,7 +51,7 @@
                 <!-- 性別 / 国籍 -->
                 <el-row :gutter="15">
                     <el-col :span="12">
-                        <el-form-item label="性別">
+                        <el-form-item label="性別" required>
                             <el-radio-group v-model="form.gender">
                                 <el-radio label="男">男</el-radio>
                                 <el-radio label="女">女</el-radio>
@@ -59,7 +59,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="国籍">
+                        <el-form-item label="国籍" required>
                             <el-select v-model="form.nationality" placeholder="選択してください">
                                 <el-option label="中国" value="中国" />
                                 <el-option label="日本" value="日本" />
