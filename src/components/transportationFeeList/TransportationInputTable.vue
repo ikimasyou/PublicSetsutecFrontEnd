@@ -89,7 +89,7 @@ function submit2(){
 </script>
 
 <style scoped>
-.transportationInputTableClass {
+/* .transportationInputTableClass {
     position: fixed;
     top: 100px;
     left: 50%;
@@ -103,5 +103,111 @@ function submit2(){
 }
 button{
     width: 50px;
+} */
+.transportationInputTableClass {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  width: 320px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  box-sizing: border-box;
 }
+
+/* 标题 */
+.transportationInputTableClass > h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 每一行表单 */
+.transportationInputTableClass > div {
+  margin-bottom: 14px;
+}
+
+/* label 样式 */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* input / select 统一风格 */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  height: 34px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #409eff;
+}
+
+/* radio 区域横向排列 */
+.transportationInputTableClass h3 + div {
+  display: flex;
+  gap: 16px;
+}
+
+input[type="radio"] {
+  margin-right: 4px;
+}
+
+/* ✅ 最底部按钮区域横向排列 */
+.transportationInputTableClass > div:last-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* ✅ 按钮样式：文字居中，宽度可变 */
+button {
+  padding: 0px;
+  margin:0px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 取消按钮 */
+button:first-child {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+/* 注册按钮 */
+button:last-child {
+  background-color: #409eff;
+  color: #fff;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+
+
 </style>
