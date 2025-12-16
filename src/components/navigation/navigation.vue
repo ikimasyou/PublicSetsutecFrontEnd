@@ -23,19 +23,51 @@
             <span class="sub-menu-text" @click="toBPResume">経歴書管理</span>
         </div>
     </div>
-
-
+    <div class="menu-text" @mousemove="barMouseMoveHandler(5)" @mouseleave="barMouseLeaveHandler(5)">
+        <div class="attendence-menu">設備管理</div>
+        <div v-if="showIMSubMenu" class="floating-box">
+            <span class="sub-menu-text" @click="toItemManager">設備管理一覧</span>
+        </div>
+    </div>
+    <div class="menu-text" @mousemove="barMouseMoveHandler(6)" @mouseleave="barMouseLeaveHandler(6)">
+        <span @click="toggleIsExpanded" v-if="!$props.isExpanded">
+            <el-icon>
+                <ArrowRightBold />
+            </el-icon>
+        </span>
+        <span @click="toggleIsExpanded" v-if="$props.isExpanded">
+            <el-icon>
+                <ArrowLeftBold />
+            </el-icon>
+        </span>
+    </div>
 </template>
 
 <script>
+import { ArrowRightBold, ArrowLeftBold } from '@element-plus/icons-vue';
 export default {
     data() {
         return {
             showSubMenu: false,
-            showBPSubMenu: false
+            showBPSubMenu: false,
+            showIMSubMenu: false,
         }
     },
+    components: {
+        ArrowRightBold,
+        ArrowLeftBold
+    },
+    props: {
+        isExpanded: {
+            type: Boolean,
+            default: false
+        }
+    }
+    ,
     methods: {
+        toggleIsExpanded() {
+            this.$emit('toggleIsExpanded')
+        },
         barMouseMoveHandler(i) {
             let elements = document.getElementsByClassName("menu-text")
             let currentElement = elements[i];
@@ -47,7 +79,9 @@ export default {
             if (i == 4) {
                 this.showBPSubMenu = true;
             }
-
+            if (i == 5) {
+                this.showIMSubMenu = true;
+            }
         },
         barMouseLeaveHandler(i) {
             let elements = document.getElementsByClassName("menu-text")
@@ -59,6 +93,9 @@ export default {
             }
             if (i == 4) {
                 this.showBPSubMenu = false;
+            }
+            if (i == 5) {
+                this.showIMSubMenu = false;
             }
         },
         changePageHandle(pageName) {
@@ -91,8 +128,11 @@ export default {
         toBPManager() {
             this.changePageHandle("BPInfo");
         },
-        toBPResume(){
+        toBPResume() {
             this.changePageHandle("BPResume");
+        },
+        toItemManager() {
+            this.changePageHandle("ItemManager");
         }
     }
 
@@ -158,5 +198,9 @@ export default {
     margin-right: 0;
     margin-left: auto;
     background-color: #f1f0f5;
+}
+
+.isExpanded {
+    width: 400px;
 }
 </style>

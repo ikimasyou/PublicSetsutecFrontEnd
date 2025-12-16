@@ -1,16 +1,16 @@
 <template>
-  <TopBar @changePage = "changePageHandle"/>
+  <TopBar @changePage="changePageHandle" />
   <div class="body">
-    <div class="sidebar">
-        <Navigation @changePage = "changePageHandle"/>
+    <div class="sidebar" :class="{ isExpanded: isExpanded }">
+      <Navigation :isExpanded="isExpanded" @toggleIsExpanded="toggleIsExpanded" @changePage="changePageHandle" />
     </div>
-    
+
     <div class="content">
-      
-      <component :is="mainContent" @changePage = "changePageHandle"/>
+
+      <component :is="mainContent" @changePage="changePageHandle" />
       <!-- 页面的主要内容放在这里 -->
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -29,14 +29,16 @@ import EventBus from '../../eventBus.js';
 import SkillSubmit from "../skill/SkillSubmit.vue";
 import BPInfo from "../dbManager/BPInfo.vue";
 import BPResume from "../dbManager/BPResume.vue";
+import ItemManager from "@/itemManager/ItemManager.vue";
 
 export default {
-  data(){
-    return{
-      mainContent: "", 
+  data() {
+    return {
+      mainContent: "",
       last_mainContent: "",
+      isExpanded: false
     }
-  }, 
+  },
   components: {
     TopBar,
     Navigation,
@@ -51,27 +53,33 @@ export default {
     MyTransportationFeeList,
     SkillSubmit,
     BPInfo,
-    BPResume
+    BPResume,
+    ItemManager
   },
-  beforeMount(){
+  beforeMount() {
     this.mainContent = "Attendance",
-    this.last_mainContent = "Attendance"
+      this.last_mainContent = "Attendance"
   },
-  mounted(){
+  mounted() {
     EventBus.on('ChangePassword', this.ChangePasswordHandle);
   },
-  methods:{
-    changePageHandle(pageName){
+  methods: {
+    toggleIsExpanded(){
+      console.log("clicked")
+      this.isExpanded=!this.isExpanded
+    }
+    ,
+    changePageHandle(pageName) {
       console.log("homepage changePageHandle, pageName = ", pageName);
-      if (pageName != "last"){
+      if (pageName != "last") {
         this.last_mainContent = this.mainContent;
-        this.mainContent = pageName; 
-      } else{
+        this.mainContent = pageName;
+      } else {
         this.mainContent = this.last_mainContent;
       }
-      
+
     },
-    ChangePasswordHandle(){
+    ChangePasswordHandle() {
       console.log("EventBus.on('ChangePassword', this.ChangePasswordHandle);");
       this.changePageHandle("ChangePassword");
     },
@@ -82,30 +90,33 @@ export default {
 </script>
 
 <style>
+
 .sidebar {
-    width: 220px;
-    overflow:clip;
-    border-radius: 10px;
-    height: 100%;
-    background-color: white;
-    /* overflow: visible;  */
-    padding-top: 20px;
+  width: 220px;
+  overflow: clip;
+  border-radius: 10px;
+  height: 100%;
+  background-color: white;
+  /* overflow: visible;  */
+  padding-top: 20px;
 }
 
+.isExpanded {
+  width: 400px;
+}
 
-.body{
+.body {
   display: flex;
   height: 100%;
   overflow: visible;
   /* flex-direction: column; */
 }
 
-.content{
-  /* white-space: nowrap; 避免影响后续布局，暂时去掉 */ 
-  flex:1;
+.content {
+  /* white-space: nowrap; 避免影响后续布局，暂时去掉 */
+  flex: 1;
   background-color: rgba(255, 255, 255, 0.7);
   width: 100%;
   border-radius: 10px;
 }
-
 </style>
